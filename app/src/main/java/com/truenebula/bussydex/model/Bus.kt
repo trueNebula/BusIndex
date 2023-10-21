@@ -1,4 +1,4 @@
-package com.truenebula.bussydex
+package com.truenebula.bussydex.model
 
 class Bus(
     val name: String = "unknown",

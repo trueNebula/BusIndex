@@ -25,7 +25,7 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.truenebula.bussydex.Bus
+import com.truenebula.bussydex.model.Bus
 
 @Composable
 fun Card(bus: Bus) {
@@ -55,8 +55,6 @@ fun Card(bus: Bus) {
                     modifier = Modifier
                         .width(300.dp)
                         .height(102.dp)
-//                        .background(Color.Magenta)
-
                 ) {
                     Column {
                         Text(
@@ -64,14 +62,13 @@ fun Card(bus: Bus) {
                             style = MaterialTheme.typography.titleMedium,
                             color = MaterialTheme.colorScheme.onPrimary,
                             textAlign = TextAlign.Left,
-                            modifier = Modifier.padding(bottom = 2.dp),
                         )
                         Text(
                             text = bus.description,
                             style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.onPrimary,
                             textAlign = TextAlign.Left,
-                            modifier = Modifier.padding(top = 4.dp),
+                            modifier = Modifier.padding(top = 2.dp),
                         )
                     }
                 }
@@ -79,7 +76,6 @@ fun Card(bus: Bus) {
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(102.dp)
-//                        .background(Color.Black)
                 ) {
                     Checkbox(
                         modifier = Modifier

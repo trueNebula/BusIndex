@@ -27,7 +27,7 @@ val Typography = Typography(
     titleMedium = TextStyle(
         fontFamily = alataFamily,
         fontWeight = FontWeight.Normal,
-        fontSize = 20.sp,
+        fontSize = 22.sp,
         lineHeight = 15.sp,
         letterSpacing = 0.5.sp,
     ),
@@ -35,7 +35,7 @@ val Typography = Typography(
         fontFamily = basicFamily,
         fontWeight = FontWeight.Normal,
         fontSize = 16.sp,
-        lineHeight = 25.sp,
+        lineHeight = 20.sp,
         letterSpacing = 0.sp
     ),
     bodySmall = TextStyle(
@@ -52,5 +52,13 @@ val Typography = Typography(
         lineHeight = 25.sp,
         letterSpacing = 0.sp,
         shadow = Shadow(Color(0x66130E01), offset = Offset(0.0f, 5.0f), blurRadius = 3f)
+    ),
+    headlineLarge = TextStyle(
+        fontFamily = faFamily,
+        fontWeight = FontWeight(900),
+        fontSize = 32.sp,
+        lineHeight = 0.sp,
+        letterSpacing = 0.sp,
+        shadow = Shadow(Color(0x66130E01), offset = Offset(5f, -5f), blurRadius = 3f)
     )
 )
