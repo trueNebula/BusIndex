@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.material3.MaterialTheme
@@ -28,7 +29,7 @@ import androidx.compose.ui.unit.dp
 import com.truenebula.bussydex.model.Bus
 
 @Composable
-fun Card(bus: Bus) {
+fun Card(bus: Bus, isAdmin: Boolean = false, onDeleteCard: (input: Bus) -> Unit) {
     val spottedState = remember { mutableStateOf(bus.spotted) }
 
     Surface(
@@ -77,20 +78,26 @@ fun Card(bus: Bus) {
                         .fillMaxWidth()
                         .height(102.dp)
                 ) {
-                    Checkbox(
-                        modifier = Modifier
-                            .align(Alignment.Center)
-                            .scale(1.6F),
-                        colors = CheckboxDefaults.colors(
-                            checkedColor = MaterialTheme.colorScheme.background,
-                            uncheckedColor = MaterialTheme.colorScheme.background,
+                    if(!isAdmin) {
+                        Checkbox(
+                            modifier = Modifier
+                                .align(Alignment.Center)
+                                .scale(1.6F),
+                            colors = CheckboxDefaults.colors(
+                                checkedColor = MaterialTheme.colorScheme.background,
+                                uncheckedColor = MaterialTheme.colorScheme.background,
                             ),
-                        checked = spottedState.value,
-                        onCheckedChange = {
-                            spottedState.value = !spottedState.value
-                            bus.spotted = spottedState.value
-                            Log.d("Bus Spotted State", bus.spotted.toString())
-                        })
+                            checked = spottedState.value,
+                            onCheckedChange = {
+                                spottedState.value = !spottedState.value
+                                bus.spotted = spottedState.value
+                                Log.d("Bus Spotted State", bus.spotted.toString())
+                            })
+                    } else {
+                        Button(onClick = { onDeleteCard(bus) }) {
+
+                        }
+                    }
                 }
             }
         }

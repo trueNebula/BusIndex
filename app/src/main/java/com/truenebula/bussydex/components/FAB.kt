@@ -32,10 +32,8 @@ import androidx.compose.ui.unit.sp
 
 
 @Composable
-fun FabArea() {
-    val open = remember {
-        mutableStateOf(false)
-    }
+fun FabArea(open: MutableState<Boolean>) {
+
     Box(
         modifier = Modifier
             .height(144.dp)
