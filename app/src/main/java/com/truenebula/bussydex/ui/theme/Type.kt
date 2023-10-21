@@ -27,14 +27,14 @@ val Typography = Typography(
     titleMedium = TextStyle(
         fontFamily = alataFamily,
         fontWeight = FontWeight.Normal,
-        fontSize = 32.sp,
-        lineHeight = 25.sp,
-        letterSpacing = 0.5.sp
+        fontSize = 20.sp,
+        lineHeight = 15.sp,
+        letterSpacing = 0.5.sp,
     ),
     bodyMedium = TextStyle(
         fontFamily = basicFamily,
         fontWeight = FontWeight.Normal,
-        fontSize = 20.sp,
+        fontSize = 16.sp,
         lineHeight = 25.sp,
         letterSpacing = 0.sp
     ),
