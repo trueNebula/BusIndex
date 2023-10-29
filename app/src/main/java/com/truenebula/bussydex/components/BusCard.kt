@@ -1,6 +1,5 @@
 package com.truenebula.bussydex.components
 
-import android.util.Log
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.background
@@ -32,7 +31,12 @@ import androidx.compose.ui.unit.dp
 import com.truenebula.bussydex.model.Bus
 
 @Composable
-fun BusCard(bus: Bus, isAdmin: Boolean = false, onDeleteCard: (input: Bus) -> Unit) {
+fun BusCard(
+    bus: Bus,
+    isAdmin: Boolean = false,
+    onUpdateBus: (input: Bus, spotted: Boolean) -> Unit,
+    onDeleteBus: (input: Bus) -> Unit
+) {
     val spottedState = remember { mutableStateOf(bus.spotted) }
 
     Surface(
@@ -57,7 +61,6 @@ fun BusCard(bus: Bus, isAdmin: Boolean = false, onDeleteCard: (input: Bus) -> Un
                     modifier = Modifier
                         .width(250.dp)
                         .height(102.dp)
-//                        .background(Color.Black)
                 ) {
                     Column {
                         Text(
@@ -65,6 +68,7 @@ fun BusCard(bus: Bus, isAdmin: Boolean = false, onDeleteCard: (input: Bus) -> Un
                             style = MaterialTheme.typography.titleMedium,
                             color = MaterialTheme.colorScheme.onPrimary,
                             textAlign = TextAlign.Left,
+                            maxLines = 1,
                         )
                         Text(
                             text = bus.description,
@@ -72,6 +76,7 @@ fun BusCard(bus: Bus, isAdmin: Boolean = false, onDeleteCard: (input: Bus) -> Un
                             color = MaterialTheme.colorScheme.onPrimary,
                             textAlign = TextAlign.Left,
                             modifier = Modifier.padding(top = 2.dp),
+                            maxLines = 2,
                         )
                     }
                 }
@@ -79,7 +84,6 @@ fun BusCard(bus: Bus, isAdmin: Boolean = false, onDeleteCard: (input: Bus) -> Un
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(102.dp)
-//                        .background(Color.Magenta)
                 ) {
                     androidx.compose.animation.AnimatedVisibility(
                         visible = !isAdmin,
@@ -96,8 +100,7 @@ fun BusCard(bus: Bus, isAdmin: Boolean = false, onDeleteCard: (input: Bus) -> Un
                             checked = spottedState.value,
                             onCheckedChange = {
                                 spottedState.value = !spottedState.value
-                                bus.spotted = spottedState.value
-                                Log.d("Bus Spotted State", bus.spotted.toString())
+                                onUpdateBus(bus, spottedState.value)
                             })
                     }
 
@@ -106,8 +109,9 @@ fun BusCard(bus: Bus, isAdmin: Boolean = false, onDeleteCard: (input: Bus) -> Un
                         enter = fadeIn(),
                         exit = fadeOut(),
                         modifier = Modifier.align(Alignment.Center)
-                    ) { TextButton(
-                            onClick = { onDeleteCard(bus) },
+                    ) {
+                        TextButton(
+                            onClick = { onDeleteBus(bus) },
                             modifier = Modifier
                                 .align(Alignment.Center)
                         ) {

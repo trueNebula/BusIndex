@@ -29,7 +29,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
-import com.truenebula.bussydex.model.Bus
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -51,7 +50,6 @@ fun Modal(
                         .width(340.dp)
                         .height(550.dp)
                         .align(Alignment.Center)
-
                 ) {
                     Box(
                         modifier = Modifier
@@ -95,7 +93,6 @@ fun Modal(
                             ) {
                                 OutlinedTextField(
                                     modifier = Modifier.padding(8.dp),
-//                                        .align(Alignment.Center),
                                     colors = TextFieldDefaults.textFieldColors(
                                         focusedLabelColor = MaterialTheme.colorScheme.onSecondary,
                                         focusedIndicatorColor = MaterialTheme.colorScheme.onSecondary,
@@ -112,8 +109,6 @@ fun Modal(
                                     modifier = Modifier
                                         .padding(8.dp)
                                         .fillMaxHeight(),
-//                                    modifier = Modifier
-//                                        .align(Alignment.Center),
                                     colors = TextFieldDefaults.textFieldColors(
                                         focusedLabelColor = MaterialTheme.colorScheme.onSecondary,
                                         focusedIndicatorColor = MaterialTheme.colorScheme.onSecondary,
