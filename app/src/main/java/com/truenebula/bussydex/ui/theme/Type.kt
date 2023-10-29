@@ -24,6 +24,13 @@ val faFamily = FontFamily(
 )
 
 val Typography = Typography(
+    titleLarge = TextStyle(
+        fontFamily = alataFamily,
+        fontWeight = FontWeight.Normal,
+        fontSize = 32.sp,
+        lineHeight = 15.sp,
+        letterSpacing = 0.5.sp,
+    ),
     titleMedium = TextStyle(
         fontFamily = alataFamily,
         fontWeight = FontWeight.Normal,

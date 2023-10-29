@@ -15,14 +15,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 
-private val DarkColorScheme = darkColorScheme(
-    primary = GreenMain,
-    onPrimary = TextBlack,
-    secondary = GreenAlt,
-    tertiary = GreenAccent,
-    background = Background,
-)
-
 private val LightColorScheme = lightColorScheme(
     primary = GreenMain,
     onPrimary = TextBlack,
@@ -30,24 +22,17 @@ private val LightColorScheme = lightColorScheme(
     secondary = GreenAlt,
     tertiary = GreenAccent,
     background = Background,
+    onSecondary = InputText,
+    secondaryContainer = DialogContainer,
 )
 
 @Composable
 fun Theme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    // Dynamic color is available on Android 12+
     dynamicColor: Boolean = false,
     content: @Composable () -> Unit
 ) {
-    val colorScheme = when {
-        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
-            val context = LocalContext.current
-            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
-        }
-
-        darkTheme -> DarkColorScheme
-        else -> LightColorScheme
-    }
+    val colorScheme = LightColorScheme
     val view = LocalView.current
     if (!view.isInEditMode) {
         SideEffect {

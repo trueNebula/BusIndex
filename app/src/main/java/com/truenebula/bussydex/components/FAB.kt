@@ -32,7 +32,7 @@ import androidx.compose.ui.unit.sp
 
 
 @Composable
-fun FabArea(open: MutableState<Boolean>) {
+fun FabArea(open: MutableState<Boolean>, isModalOpen: MutableState<Boolean>) {
 
     Box(
         modifier = Modifier
@@ -49,7 +49,7 @@ fun FabArea(open: MutableState<Boolean>) {
                 enter = fadeIn() + slideInVertically { 80 },
                 exit = fadeOut() + slideOutVertically { 80 },
             ) {
-                FabExtra()
+                FabExtra(isModalOpen)
             }
         }
     }
@@ -72,8 +72,8 @@ fun FAB(open: MutableState<Boolean>) {
         contentColor = MaterialTheme.colorScheme.background,
         shape = CircleShape,
         elevation = FloatingActionButtonDefaults.elevation(
-            defaultElevation = 8.dp,
-            pressedElevation = 2.dp
+            defaultElevation = 0.dp,
+            pressedElevation = 0.dp
         ),
         modifier = Modifier
             .scale(scale.value)
@@ -81,12 +81,10 @@ fun FAB(open: MutableState<Boolean>) {
                 when (it.action) {
                     MotionEvent.ACTION_DOWN -> {
                         clicked.value = true
-                        open.value = !open.value
-                        Log.d("FAB", open.value.toString())
-
                     }
                     MotionEvent.ACTION_UP -> {
                         clicked.value = false
+                        open.value = !open.value
                     }
                 }
                 true
@@ -121,9 +119,8 @@ fun FAB(open: MutableState<Boolean>) {
 }
 
 @OptIn(ExperimentalComposeUiApi::class)
-
 @Composable
-fun FabExtra() {
+fun FabExtra(isModalOpen: MutableState<Boolean>) {
     val clicked = remember {
         mutableStateOf(false)
     }
@@ -137,8 +134,8 @@ fun FabExtra() {
         contentColor = MaterialTheme.colorScheme.background,
         shape = CircleShape,
         elevation = FloatingActionButtonDefaults.elevation(
-            defaultElevation = 8.dp,
-            pressedElevation = 2.dp
+            defaultElevation = 0.dp,
+            pressedElevation = 0.dp
         ),
         modifier = Modifier
             .scale(scale.value)
@@ -150,6 +147,8 @@ fun FabExtra() {
 
                     MotionEvent.ACTION_UP -> {
                         clicked.value = false
+                        isModalOpen.value = true
+                        Log.d("modal", isModalOpen.value.toString())
                     }
                 }
                 true

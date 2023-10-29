@@ -1,6 +1,8 @@
 package com.truenebula.bussydex.components
 
 import android.util.Log
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -11,12 +13,12 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -24,12 +26,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.truenebula.bussydex.model.Bus
 
 @Composable
-fun Card(bus: Bus, isAdmin: Boolean = false, onDeleteCard: (input: Bus) -> Unit) {
+fun BusCard(bus: Bus, isAdmin: Boolean = false, onDeleteCard: (input: Bus) -> Unit) {
     val spottedState = remember { mutableStateOf(bus.spotted) }
 
     Surface(
@@ -43,19 +46,18 @@ fun Card(bus: Bus, isAdmin: Boolean = false, onDeleteCard: (input: Bus) -> Unit)
             modifier = Modifier
                 .fillMaxSize()
                 .background(
-                    MaterialTheme.colorScheme.primaryContainer,
-                    shape = RoundedCornerShape(20.dp)
+                    MaterialTheme.colorScheme.primaryContainer, shape = RoundedCornerShape(20.dp)
                 ),
             color = MaterialTheme.colorScheme.primaryContainer,
         ) {
             Row(
-                modifier = Modifier
-                    .padding(18.dp, 14.dp, 18.dp, 14.dp)
+                modifier = Modifier.padding(18.dp, 14.dp, 18.dp, 14.dp)
             ) {
                 Box(
                     modifier = Modifier
-                        .width(300.dp)
+                        .width(250.dp)
                         .height(102.dp)
+//                        .background(Color.Black)
                 ) {
                     Column {
                         Text(
@@ -77,12 +79,16 @@ fun Card(bus: Bus, isAdmin: Boolean = false, onDeleteCard: (input: Bus) -> Unit)
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(102.dp)
+//                        .background(Color.Magenta)
                 ) {
-                    if(!isAdmin) {
-                        Checkbox(
-                            modifier = Modifier
-                                .align(Alignment.Center)
-                                .scale(1.6F),
+                    androidx.compose.animation.AnimatedVisibility(
+                        visible = !isAdmin,
+                        enter = fadeIn(),
+                        exit = fadeOut(),
+                        modifier = Modifier.align(Alignment.Center)
+                    ) {
+                        Checkbox(modifier = Modifier
+                            .scale(1.6F),
                             colors = CheckboxDefaults.colors(
                                 checkedColor = MaterialTheme.colorScheme.background,
                                 uncheckedColor = MaterialTheme.colorScheme.background,
@@ -93,11 +99,26 @@ fun Card(bus: Bus, isAdmin: Boolean = false, onDeleteCard: (input: Bus) -> Unit)
                                 bus.spotted = spottedState.value
                                 Log.d("Bus Spotted State", bus.spotted.toString())
                             })
-                    } else {
-                        Button(onClick = { onDeleteCard(bus) }) {
+                    }
 
+                    androidx.compose.animation.AnimatedVisibility(
+                        visible = isAdmin,
+                        enter = fadeIn(),
+                        exit = fadeOut(),
+                        modifier = Modifier.align(Alignment.Center)
+                    ) { TextButton(
+                            onClick = { onDeleteCard(bus) },
+                            modifier = Modifier
+                                .align(Alignment.Center)
+                        ) {
+                            Text(
+                                text = "\uF1F8", style = MaterialTheme.typography.headlineMedium,
+                                color = Color(0xFFFF0000),
+                                textAlign = TextAlign.Center
+                            )
                         }
                     }
+
                 }
             }
         }
