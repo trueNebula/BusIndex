@@ -1,4 +1,4 @@
-package com.truenebula.bussydex.components
+package com.truenebula.bussydex.ui.components
 
 import android.util.Log
 import android.view.MotionEvent

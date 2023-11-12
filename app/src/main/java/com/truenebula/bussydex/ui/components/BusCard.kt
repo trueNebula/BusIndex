@@ -1,4 +1,4 @@
-package com.truenebula.bussydex.components
+package com.truenebula.bussydex.ui.components
 
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -35,6 +35,7 @@ fun BusCard(
     bus: Bus,
     isAdmin: Boolean = false,
     onUpdateBus: (input: Bus, spotted: Boolean) -> Unit,
+    onUpdateRaw: (input: Bus) -> Unit,
     onDeleteBus: (input: Bus) -> Unit
 ) {
     val spottedState = remember { mutableStateOf(bus.spotted) }
@@ -59,7 +60,7 @@ fun BusCard(
             ) {
                 Box(
                     modifier = Modifier
-                        .width(250.dp)
+                        .width(200.dp)
                         .height(102.dp)
                 ) {
                     Column {
@@ -110,16 +111,27 @@ fun BusCard(
                         exit = fadeOut(),
                         modifier = Modifier.align(Alignment.Center)
                     ) {
-                        TextButton(
-                            onClick = { onDeleteBus(bus) },
-                            modifier = Modifier
-                                .align(Alignment.Center)
-                        ) {
-                            Text(
-                                text = "\uF1F8", style = MaterialTheme.typography.headlineMedium,
-                                color = Color(0xFFFF0000),
-                                textAlign = TextAlign.Center
-                            )
+                        Row() {
+                            TextButton(
+                                onClick = { onUpdateRaw(bus) },
+                                modifier = Modifier
+                            ) {
+                                Text(
+                                    text = "\uF0AD", style = MaterialTheme.typography.headlineMedium,
+                                    color = MaterialTheme.colorScheme.onPrimary,
+                                    textAlign = TextAlign.Center
+                                )
+                            }
+                            TextButton(
+                                onClick = { onDeleteBus(bus) },
+                                modifier = Modifier
+                            ) {
+                                Text(
+                                    text = "\uF1F8", style = MaterialTheme.typography.headlineMedium,
+                                    color = Color(0xFFFF0000),
+                                    textAlign = TextAlign.Center
+                                )
+                            }
                         }
                     }
 

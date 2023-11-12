@@ -1,14 +1,13 @@
-package com.truenebula.bussydex.components
+package com.truenebula.bussydex.ui.components
 
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -19,7 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun Header() {
+fun ViewHeader(title: String, onClickBack: () -> Unit) {
     Surface(
         color = MaterialTheme.colorScheme.tertiary,
         modifier = Modifier
@@ -33,35 +32,29 @@ fun Header() {
                 shape = RoundedCornerShape(0.dp, 0.dp, 20.dp, 20.dp)
             ),
     ) {
-        Box {
-            Row(
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(64.dp)
+        ) {
+            Text(
+                text = title,
+                style = MaterialTheme.typography.titleLarge,
+                color = MaterialTheme.colorScheme.onPrimary,
+                textAlign = TextAlign.Center,
                 modifier = Modifier.align(Alignment.Center)
+            )
+            TextButton(
+                onClick = onClickBack,
+                modifier = Modifier
+                    .align(Alignment.CenterEnd)
             ) {
                 Text(
-                    text = "Bus",
-                    modifier = Modifier.padding(8.dp, 8.dp, 1.dp, 8.dp),
-                    textAlign = TextAlign.Center,
-                    style = MaterialTheme.typography.headlineMedium,
+                    text = "x",
                     color = MaterialTheme.colorScheme.onPrimary,
-                )
-                Text(
-                    text = "syDex",
-                    modifier = Modifier.padding(1.dp, 8.dp, 8.dp, 8.dp),
-                    textAlign = TextAlign.Center,
-                    letterSpacing = 3.sp,
-                    style = MaterialTheme.typography.headlineMedium,
-                    color = MaterialTheme.colorScheme.onPrimary,
+                    fontSize = 18.sp,
                 )
             }
         }
-
-//            Box() {
-//                Image(
-//                    painter = painterResource(id = R.drawable.bussydexheader),
-//                    contentDescription = "BussyDex Logo",
-//                    contentScale = ContentScale.Fit,
-//                    modifier = Modifier.align(Alignment.Center).shadow(elevation = 4.dp, spotColor = Color(0x40000000), ambientColor = Color(0x40000000))
-//                )
-//            }
     }
 }

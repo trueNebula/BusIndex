@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">BussyDex</string>
+    <string name="title_activity_add_bus">AddBus</string>
+    <string name="title_activity_update_bus">UpdateBusActivity</string>
 </resources>
