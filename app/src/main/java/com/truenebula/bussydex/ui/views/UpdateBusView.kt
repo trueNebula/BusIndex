@@ -50,7 +50,7 @@ fun UpdateBusView(repository: Repository, id: Number) {
                 .fillMaxSize()
                 .background(MaterialTheme.colorScheme.background)
         ) {
-            ViewHeader("Add Bus", ::onClickBack)
+            ViewHeader("Update Bus", ::onClickBack)
             OutlinedTextField(
                 value = busName,
                 onValueChange = { text -> busName = text.trimStart { it == '0' } },

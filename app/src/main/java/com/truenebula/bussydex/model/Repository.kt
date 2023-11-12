@@ -48,7 +48,7 @@ class Repository : Serializable {
         dateSpotted: String
     ): Bus {
         val id = getLastId()
-        val newBus = Bus(id, busName, busDescription, dateAdded = getFormattedDateString())
+        val newBus = Bus(id, busName, busDescription, spotted, dateAdded, dateSpotted)
         Log.d("AddRaw", "${newBus.name}, ${newBus.description}, ${newBus.dateAdded}")
 
         busList.add(newBus)
